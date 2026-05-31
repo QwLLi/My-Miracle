@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список пользователей</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Пользователи</h1>
+<a th:href="@{/users/save-user}">Добавить пользователя</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>year</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.year}"></td>
+        <td>
+            <a th:href="@{/users/update(id=${user.id})}">Редактировать</a> |
+            <a th:href="@{/users/delete(id=${user.id})}"
+               onclick="return confirm('Удалить?')">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
