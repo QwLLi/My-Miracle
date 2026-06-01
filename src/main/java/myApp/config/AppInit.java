@@ -7,12 +7,10 @@ import jakarta.servlet.Filter;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
     }
-
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
@@ -20,7 +18,6 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
                 WebConfig.class
         };
     }
-
 
     @Override
     protected String[] getServletMappings() {
