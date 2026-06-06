@@ -5,7 +5,6 @@ import myApp.dao.Dao;
 import myApp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -13,8 +12,6 @@ public class ServiсeImpl implements Serviсe {
 
     @Autowired
     private Dao daoImp;
-
-
 
     @Transactional
     @Override
@@ -34,12 +31,10 @@ public class ServiсeImpl implements Serviсe {
         daoImp.updateUser(user);
     }
 
-
     @Override
     public User getUser(long id) {
         return daoImp.getUser(id);
     }
-
 
     @Override
     public List<User> getAllUsers() {

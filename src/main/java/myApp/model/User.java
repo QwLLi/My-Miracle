@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
-
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Getter
@@ -15,22 +15,22 @@ import lombok.*;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "users")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @Column(name = "first_name")
     @NonNull
-    private String firstName;
+    String firstName;
 
     @Column(name = "last_name")
     @NonNull
-    private String lastName;
+    String lastName;
 
     @Column
     @NonNull
-    private int year;
-
+    int year;
 }
