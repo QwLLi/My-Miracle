@@ -33,5 +33,4 @@ public class User {
     @Column
     @NonNull
     int year;
-
 }

@@ -3,13 +3,12 @@ package myApp.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import myApp.model.User;
 import myApp.serviсe.Serviсe;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/users")
 @Controller
@@ -43,9 +42,11 @@ public class UserController {
     }
 
     @PostMapping("/save-user")
-    public String processSaveUser(@ModelAttribute("user") User user) {
+    public String processSaveUser(@ModelAttribute("user") User user , Model model) {
         serviseImp.saveUser(user.getFirstName(), user.getLastName(), user.getYear());
-        return "redirect:/users";
+        List<User> users = serviseImp.getAllUsers();
+        model.addAttribute("users", users);
+        return "users";
     }
 
     @Operation(summary = "Изменение пользователя")
@@ -57,15 +58,21 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String processUpdateUser(@ModelAttribute("user") User user) {
+    public String processUpdateUser(@ModelAttribute("user") User user , Model model) {
         serviseImp.updateUser(user);
-        return "redirect:/users";
+        List<User> users = serviseImp.getAllUsers();
+        model.addAttribute("users", users);
+        return "users";
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)  // проверял явное указание статуса
     @Operation(summary = "Удаление пользователя")
     @GetMapping(value = "/delete")
-    public String deleteUser(@RequestParam(value = "id", required = false) Long id) {
+    public String deleteUser(@RequestParam(value = "id", required = false) Long id , Model model) {
         serviseImp.deleteUser(id);
-        return "redirect:/users";
+        List<User> users = serviseImp.getAllUsers();
+        model.addAttribute("users", users);
+        return "users";
     }
 
 }
